@@ -25,7 +25,5 @@ This is a **modern, professional, and fully responsive corporate website templat
 - **SEO Ready:** Semantic HTML structure and proper heading hierarchy
 - **Lightweight:** Optimized CSS and JS for fast loading
 
----
 
-## 🗂️ Project Structure
 
