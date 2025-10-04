@@ -23,6 +23,7 @@
     .navbar .language-selector {
       display: inline-block;
       margin-left: 20px;
+      position: relative;
     }
 
     .navbar .language-selector button {
@@ -43,11 +44,13 @@
     /* Hero section */
     .hero {
       position: relative;
-      height: 80vh;
+      height: 90vh;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      text-align: center;
+      color: white;
     }
 
     .hero-video {
@@ -58,13 +61,24 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
+      filter: brightness(0.35);
     }
 
     .hero-content {
-      color: white;
-      text-align: center;
+      z-index: 1;
       max-width: 800px;
       padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.8em;
+      font-weight: 700;
+      margin-bottom: 0.4em;
+    }
+
+    .hero-content p {
+      font-size: 1.2em;
+      margin-bottom: 1.2em;
     }
 
     .hero-content .btn {
@@ -76,6 +90,7 @@
       text-decoration: none;
       border-radius: 5px;
       transition: background 0.3s;
+      font-weight: 500;
     }
 
     .hero-content .btn:hover {
@@ -85,7 +100,7 @@
     /* Contact icons */
     .contact-links {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 50px;
     }
 
     .contact-links a {
@@ -106,10 +121,46 @@
 
     /* Intro section */
     .intro.container {
-      padding: 50px 20px;
+      padding: 60px 20px;
       max-width: 1000px;
       margin: 0 auto;
       text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2em;
+      }
+
+      .hero-content p {
+        font-size: 1em;
+      }
+
+      .contact-links a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      #nav-menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        border-left: 1px solid #eee;
+        box-shadow: -3px 3px 10px rgba(0,0,0,0.05);
+      }
+
+      #nav-menu.active {
+        display: flex;
+      }
+
+      #nav-toggle {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -128,12 +179,9 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <!-- Language Selector inline -->
+    <!-- Language Selector -->
     <div class="language-selector">
-      <button onclick="setLanguage('en')">EN</button>
-      <button onclick="setLanguage('sr')">SR</button>
-      <button onclick="setLanguage('de')">DE</button>
-      <button onclick="setLanguage('es')">ES</button>
+      <button onclick="setLanguage('en')"><img src="assets/images/flags/en.png" width="20" alt="EN"> EN ▼</button>
     </div>
 
     <button id="nav-toggle">☰</button>
@@ -161,7 +209,6 @@
   </p>
 </section>
 
-<!-- Contact section with icons -->
 <section class="contact-links">
   <h3>Contact Us</h3>
   <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -175,12 +222,20 @@
 
 <script src="assets/js/main.js"></script>
 <script>
+  // Language switcher
   function setLanguage(lang) {
     const elements = document.querySelectorAll('[data-' + lang + ']');
     elements.forEach(el => {
       el.textContent = el.getAttribute('data-' + lang);
     });
   }
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
 </script>
 
 </body>
