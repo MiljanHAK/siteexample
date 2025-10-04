@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Test Tech Corporation | Innovative Technology Solutions</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* Jednostavan stil za jezički selector */
+    .language-selector {
+      text-align: right;
+      margin: 10px 20px;
+    }
+    .language-selector button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* Kontakt sekcija */
+    .contact-links {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .contact-links a {
+      margin: 0 10px;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -23,22 +46,42 @@
   </div>
 </header>
 
+<!-- Language Selector -->
+<div class="language-selector">
+  <span>Select Language:</span>
+  <button onclick="setLanguage('en')">EN</button>
+  <button onclick="setLanguage('sr')">SR</button>
+  <button onclick="setLanguage('de')">DE</button>
+  <button onclick="setLanguage('es')">ES</button>
+</div>
+
 <section class="hero">
   <video autoplay muted loop class="hero-video">
     <source src="assets/videos/hero-bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
-</video>
-  <div class="hero-content">
-    <h1>Innovating the Future of Technology</h1>
-    <p>Building reliable, scalable, and secure digital solutions for modern businesses.</p>
-    <a href="services.html" class="btn">Explore Services</a>
+  </video>
+  <div class="hero-content" id="hero-content">
+    <h1 data-en="Innovating the Future of Technology" data-sr="Inoviranje budućnosti tehnologije" data-de="Die Zukunft der Technologie gestalten" data-es="Innovando el futuro de la tecnología">Innovating the Future of Technology</h1>
+    <p data-en="Building reliable, scalable, and secure digital solutions for modern businesses." data-sr="Izgradnja pouzdanih, skalabilnih i sigurnih digitalnih rešenja za moderne kompanije." data-de="Zuverlässige, skalierbare und sichere digitale Lösungen für moderne Unternehmen." data-es="Construyendo soluciones digitales fiables, escalables y seguras para empresas modernas.">
+      Building reliable, scalable, and secure digital solutions for modern businesses.
+    </p>
+    <a href="services.html" class="btn" data-en="Explore Services" data-sr="Pogledajte usluge" data-de="Dienstleistungen entdecken" data-es="Explorar servicios">Explore Services</a>
   </div>
 </section>
 
-
 <section class="intro container">
-  <h2>Why Choose Test Tech Corporation?</h2>
-  <p>We blend cutting-edge technology with strategic thinking to help companies accelerate digital transformation.</p>
+  <h2 data-en="Why Choose Test Tech Corporation?" data-sr="Zašto izabrati Test Tech Corporation?" data-de="Warum Test Tech Corporation wählen?" data-es="¿Por qué elegir Test Tech Corporation?">Why Choose Test Tech Corporation?</h2>
+  <p data-en="We blend cutting-edge technology with strategic thinking to help companies accelerate digital transformation." data-sr="Kombinujemo najsavremeniju tehnologiju sa strateškim razmišljanjem kako bismo pomogli kompanijama da ubrzaju digitalnu transformaciju." data-de="Wir verbinden modernste Technologie mit strategischem Denken, um Unternehmen bei der Beschleunigung der digitalen Transformation zu unterstützen." data-es="Combinamos tecnología de vanguardia con pensamiento estratégico para ayudar a las empresas a acelerar la transformación digital.">
+    We blend cutting-edge technology with strategic thinking to help companies accelerate digital transformation.
+  </p>
+</section>
+
+<!-- Kontakt linkovi -->
+<section class="contact-links">
+  <h3>Contact Us</h3>
+  <a href="https://wa.me/1234567890" target="_blank">WhatsApp</a>
+  <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
+  <a href="mailto:info@testtechcorp.com">Email</a>
 </section>
 
 <footer>
@@ -46,5 +89,18 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script>
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-' + lang + ']');
+    elements.forEach(el => {
+      if(el.tagName === 'A') {
+        el.textContent = el.getAttribute('data-' + lang);
+      } else {
+        el.textContent = el.getAttribute('data-' + lang);
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
