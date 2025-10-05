@@ -1,18 +1,23 @@
-// NAV TOGGLE
-const toggle = document.getElementById("nav-toggle");
-const navMenu = document.getElementById("nav-menu");
+// Toggle language dropdown
+const langBtn = document.getElementById('lang-btn');
+const langDropdown = document.getElementById('lang-dropdown');
 
-toggle.addEventListener("click", () => {
-  navMenu.classList.toggle("active");
+langBtn.addEventListener('click', () => {
+  langDropdown.classList.toggle('show');
 });
 
-// SCROLL REVEAL ANIMATION (basic)
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".service-card, .portfolio-item, .blog-post").forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      el.style.opacity = 1;
-      el.style.transform = "translateY(0)";
+window.onclick = function(event) {
+  if (!event.target.matches('#lang-btn')) {
+    if (langDropdown.classList.contains('show')) {
+      langDropdown.classList.remove('show');
     }
+  }
+}
+
+// Set language function
+function setLanguage(lang) {
+  const elements = document.querySelectorAll('[data-en]');
+  elements.forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
   });
-});
+}
