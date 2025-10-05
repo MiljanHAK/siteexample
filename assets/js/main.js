@@ -1,13 +1,5 @@
-<!-- JS -->
-<script>
-// Toggle nav menu on mobile
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
-navToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-});
 
-// Language dropdown
+// Toggle language dropdown
 const langBtn = document.getElementById('lang-btn');
 const langDropdown = document.getElementById('lang-dropdown');
 
@@ -15,23 +7,18 @@ langBtn.addEventListener('click', () => {
   langDropdown.classList.toggle('show');
 });
 
-window.addEventListener('click', function(event) {
-  if (!event.target.closest('.language-selector')) {
-    langDropdown.classList.remove('show');
+window.onclick = function(event) {
+  if (!event.target.matches('#lang-btn')) {
+    if (langDropdown.classList.contains('show')) {
+      langDropdown.classList.remove('show');
+    }
   }
-});
+}
 
+// Set language function
 function setLanguage(lang) {
   const elements = document.querySelectorAll('[data-en]');
   elements.forEach(el => {
-    const newText = el.getAttribute(`data-${lang}`);
-    if (newText) el.textContent = newText;
+    el.textContent = el.getAttribute(`data-${lang}`);
   });
-
-  // Promeni samo ikonu u glavnom dugmetu
-  const mainImg = langBtn.querySelector('img');
-  mainImg.src = `assets/images/flags/${lang === 'sr' ? 'rs' : lang}.png`;
-
-  langDropdown.classList.remove('show'); // zatvori dropdown
 }
-</script>
