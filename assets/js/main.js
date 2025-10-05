@@ -31,5 +31,5 @@ function setLanguage(lang) {
     case 'es': flagImg.src = 'assets/images/flags/es.png'; label = 'ES'; break;
     default: flagImg.src = 'assets/images/flags/en.png'; label = 'EN'; break;
   }
-  langBtn.innerHTML = `<img src="${flagImg.src}" width="20"> ${label} ▼`;
+  langBtn.innerHTML = `<img src="${flagImg.src}" width="15"> ${label} ▼`;
 }
