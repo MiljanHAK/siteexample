@@ -9,7 +9,7 @@
   // Language dropdown
   const langBtn = document.getElementById('lang-btn');
   const langDropdown = document.getElementById('lang-dropdown');
-  const langSwitcher = document.getElementById('language-switcher');
+  const langSwitcher = document.querySelector('.language-switcher');
 
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
