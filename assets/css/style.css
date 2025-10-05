@@ -102,6 +102,7 @@ a:hover {
   height: 75px;
 }
 
+/* Desktop Navigation */
 #nav-menu {
   display: flex;
   gap: 2em;
@@ -118,12 +119,112 @@ a:hover {
   color: var(--primary);
 }
 
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 998;
+}
+
+.mobile-nav.active {
+  display: flex;
+}
+
+.mobile-nav a {
+  padding: 1em 1.5em;
+  color: var(--text-dark);
+  border-bottom: 1px solid #f0f0f0;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.mobile-nav a:hover {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.mobile-nav a:last-child {
+  border-bottom: none;
+}
+
 #nav-toggle {
   display: none;
   font-size: 1.6em;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0.5em;
+  z-index: 1000;
+}
+
+/* ------------------------------
+   LANGUAGE DROPDOWN - ISPRAVLJENO
+--------------------------------*/
+.language-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.lang-btn:hover {
+  background: var(--secondary);
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1001;
+  flex-direction: column;
+  min-width: 60px;
+  border: 1px solid #e5e8ec;
+}
+
+.lang-dropdown button {
+  background: none;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: var(--transition);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.lang-dropdown button:last-child {
+  border-bottom: none;
+}
+
+.lang-dropdown button:hover {
+  background: var(--secondary);
+}
+
+.lang-dropdown button img {
+  width: 24px;
+  height: auto;
+}
+
+/* KLJUČNO: Prikaz dropdown-a kada je aktivan */
+.language-switcher.active .lang-dropdown {
+  display: flex;
 }
 
 /* ------------------------------
@@ -341,78 +442,22 @@ footer {
 }
 
 /* ------------------------------
-   LANGUAGE DROPDOWN
---------------------------------*/
-.language-switcher {
-  position: relative; /* ključno da dropdown bude u odnosu na dugme */
-  display: inline-block;
-}
-
-.lang-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.lang-dropdown {
-  display: none;
-  position: absolute;
-  top: 110%; /* ispod dugmeta */
-  left: 0; /* počinje od leve ivice dugmeta */
-  background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 1000;
-  flex-direction: column;
-}
-
-.lang-dropdown button {
-  background: none;
-  border: none;
-  padding: 0.3em 0.5em;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-}
-
-.lang-dropdown button img {
-  width: 24px;
-  height: auto;
-}
-
-.lang-dropdown.show {
-  display: flex;
-}
-
-/* ------------------------------
    RESPONSIVE
 --------------------------------*/
 @media (max-width: 768px) {
-  /* tvoj postojeći responsive kod */
-}
-/* ------------------------------
-   RESPONSIVE
---------------------------------*/
-@media (max-width: 768px) {
+  /* Desktop navigacija se sakriva na mobilnim */
   #nav-menu {
     display: none;
-    flex-direction: column;
-    background: var(--white);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 220px;
-    border-left: 1px solid #eee;
-    box-shadow: -3px 3px 10px rgba(0,0,0,0.05);
   }
 
-  #nav-menu.active {
-    display: flex;
-  }
-
+  /* Mobilni meni se prikazuje */
   #nav-toggle {
     display: block;
+  }
+
+  /* Language switcher na mobilnim */
+  .language-switcher {
+    margin-right: 1em;
   }
 
   .hero h1 {
@@ -425,5 +470,10 @@ footer {
 
   .hero-content .btn {
     padding: 0.6em 1.5em;
+  }
+
+  .contact-links a {
+    display: block;
+    margin: 0.5em 0;
   }
 }
