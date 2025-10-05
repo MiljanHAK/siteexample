@@ -344,9 +344,8 @@ footer {
    LANGUAGE DROPDOWN
 --------------------------------*/
 .language-switcher {
-  position: relative; /* važno za dropdown */
+  position: relative; /* ključno da dropdown bude u odnosu na dugme */
   display: inline-block;
-  margin-left: 1em; /* opcionalno, da malo pomeriš od ostalih elemenata */
 }
 
 .lang-btn {
@@ -354,25 +353,18 @@ footer {
   border: none;
   cursor: pointer;
   padding: 0;
-  display: flex;
-  align-items: center;
 }
 
 .lang-dropdown {
   display: none;
   position: absolute;
-  top: 100%; /* odmah ispod dugmeta */
-  left: 0;   /* ispod dugmeta, ne desno */
+  top: 110%; /* ispod dugmeta */
+  left: 0; /* počinje od leve ivice dugmeta */
   background: var(--white);
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   z-index: 1000;
   flex-direction: column;
-  padding: 0.5em 0;
-}
-
-.lang-dropdown.show {
-  display: flex;
 }
 
 .lang-dropdown button {
@@ -387,6 +379,10 @@ footer {
 .lang-dropdown button img {
   width: 24px;
   height: auto;
+}
+
+.lang-dropdown.show {
+  display: flex;
 }
 
 /* ------------------------------
