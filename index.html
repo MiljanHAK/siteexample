@@ -76,6 +76,9 @@
 </footer>
 
 <!-- JS -->
+<!-- JS -->
+<script src="assets/js/main.js"></script>
+
 <script>
   // Toggle nav menu on mobile
   const navToggle = document.getElementById('nav-toggle');
@@ -107,15 +110,11 @@
 
     // Promeni samo ikonu u glavnom dugmetu
     const mainImg = langBtn.querySelector('img');
-    switch(lang) {
-      case 'sr': mainImg.src = 'assets/images/flags/rs.png'; break;
-      case 'de': mainImg.src = 'assets/images/flags/de.png'; break;
-      case 'es': mainImg.src = 'assets/images/flags/es.png'; break;
-      default: mainImg.src = 'assets/images/flags/en.png';
-    }
+    mainImg.src = `assets/images/flags/${lang === 'sr' ? 'rs' : lang}.png`;
 
     langDropdown.classList.remove('show'); // zatvori dropdown
   }
 </script>
+
 </body>
 </html>
