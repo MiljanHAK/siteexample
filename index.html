@@ -231,27 +231,28 @@
     langDropdown.style.display = langDropdown.style.display === 'block' ? 'none' : 'block';
   });
 
-  // Change language
+  <script>
+  // Promena jezika
   function setLanguage(lang) {
     const elements = document.querySelectorAll('[data-' + lang + ']');
     elements.forEach(el => {
       el.textContent = el.getAttribute('data-' + lang);
     });
     langDropdown.style.display = 'none';
-    // Change button image and text
+    // Promena slike i teksta na dugmetu
     const imgSrc = document.querySelector('#lang-dropdown button[onclick="setLanguage(\'' + lang + '\')"] img').src;
     langBtn.innerHTML = `<img src="${imgSrc}" width="20"> ${lang} ▼`;
   }
-  <script>
-    // Dinamično prilagođavanje visine hero sekcije
-    function setHeroHeight() {
-      const hero = document.querySelector('.hero');
-      hero.style.height = window.innerHeight + 'px';
-    }
 
-    window.addEventListener('load', setHeroHeight);
-    window.addEventListener('resize', setHeroHeight);
-  </script>
+  // Dinamično prilagođavanje visine hero sekcije
+  function setHeroHeight() {
+    const hero = document.querySelector('.hero');
+    hero.style.height = window.innerHeight + 'px';
+  }
+
+  window.addEventListener('load', setHeroHeight);
+  window.addEventListener('resize', setHeroHeight);
+</script>
 
 </body>
 </html>
