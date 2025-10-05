@@ -1,26 +1,18 @@
-// Toggle language dropdown
-const langBtn = document.getElementById('lang-btn');
-const langDropdown = document.getElementById('lang-dropdown');
+// NAV TOGGLE
+const toggle = document.getElementById("nav-toggle");
+const navMenu = document.getElementById("nav-menu");
 
-langBtn.addEventListener('click', () => {
-  langDropdown.style.display = langDropdown.style.display === 'block' ? 'none' : 'block';
+toggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
 });
 
-// Change language
-function setLanguage(lang) {
-  const elements = document.querySelectorAll('[data-' + lang + ']');
-  elements.forEach(el => {
-    el.textContent = el.getAttribute('data-' + lang);
+// SCROLL REVEAL ANIMATION (basic)
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".service-card, .portfolio-item, .blog-post").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.style.opacity = 1;
+      el.style.transform = "translateY(0)";
+    }
   });
-  langDropdown.style.display = 'none';
-  const imgSrc = document.querySelector('#lang-dropdown button[onclick="setLanguage(\'' + lang + '\')"] img').src;
-  langBtn.innerHTML = `<img src="${imgSrc}" width="20"> ${lang.toUpperCase()} ▼`;
-}
-
-// Fix hero height (video full viewport)
-function setHeroHeight() {
-  const hero = document.querySelector('.hero');
-  hero.style.height = window.innerHeight + 'px';
-}
-window.addEventListener('load', setHeroHeight);
-window.addEventListener('resize', setHeroHeight);
+});
