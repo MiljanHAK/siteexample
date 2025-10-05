@@ -343,12 +343,12 @@ footer {
 /* ------------------------------
    LANGUAGE DROPDOWN
 --------------------------------*/
-.language-selector {
+.language-switcher {
   position: relative;
   display: inline-block;
 }
 
-#lang-btn {
+.lang-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -367,13 +367,17 @@ footer {
   flex-direction: column;
 }
 
+.lang-dropdown.show {
+  display: flex;
+}
+
 .lang-dropdown button {
   background: none;
   border: none;
   padding: 0.3em 0.5em;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .lang-dropdown button img {
@@ -381,10 +385,12 @@ footer {
   height: auto;
 }
 
-.lang-dropdown.show {
-  display: flex;
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+@media (max-width: 768px) {
+  /* tvoj postojeći responsive kod */
 }
-
 /* ------------------------------
    RESPONSIVE
 --------------------------------*/
