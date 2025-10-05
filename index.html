@@ -239,7 +239,16 @@
     const imgSrc = document.querySelector('#lang-dropdown button[onclick="setLanguage(\'' + lang + '\')"] img').src;
     langBtn.innerHTML = `<img src="${imgSrc}" width="20"> ${lang} ▼`;
   }
-</script>
+  <script>
+    // Dinamično prilagođavanje visine hero sekcije
+    function setHeroHeight() {
+      const hero = document.querySelector('.hero');
+      hero.style.height = window.innerHeight + 'px';
+    }
+
+    window.addEventListener('load', setHeroHeight);
+    window.addEventListener('resize', setHeroHeight);
+  </script>
 
 </body>
 </html>
