@@ -1,9 +1,18 @@
 <script>
-  // Hamburger toggle
+  // Hamburger toggle za MOBILNI meni
   const navToggle = document.getElementById('nav-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+  const mobileNavMenu = document.getElementById('mobile-nav-menu'); // promenjeno na mobile-nav-menu
+  
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileNavMenu.classList.toggle('active');
+    
+    // Menja ikonu ☰ ↔ ✕
+    if (mobileNavMenu.classList.contains('active')) {
+      navToggle.innerHTML = '✕';
+    } else {
+      navToggle.innerHTML = '☰';
+    }
   });
 
   // Language dropdown
@@ -13,12 +22,29 @@
 
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    langDropdown.classList.toggle('show');
+    langSwitcher.classList.toggle('active'); // promenjeno na .active umesto .show
   });
 
+  // Zatvaranje dropdown-a i mobilnog menija kada se klikne bilo gde drugde
   window.addEventListener('click', (e) => {
+    // Zatvori language dropdown
     if (!langSwitcher.contains(e.target)) {
-      langDropdown.classList.remove('show');
+      langSwitcher.classList.remove('active');
+    }
+    
+    // Zatvori mobilni meni
+    if (!mobileNavMenu.contains(e.target) && !navToggle.contains(e.target)) {
+      mobileNavMenu.classList.remove('active');
+      navToggle.innerHTML = '☰';
+    }
+  });
+
+  // Zatvaranje na ESC tipku
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      langSwitcher.classList.remove('active');
+      mobileNavMenu.classList.remove('active');
+      navToggle.innerHTML = '☰';
     }
   });
 
@@ -36,9 +62,8 @@
       case 'es': mainImg.src = 'assets/images/flags/es.png'; break;
       default: mainImg.src = 'assets/images/flags/en.png';
     }
-    langDropdown.classList.remove('show');
+    
+    // Zatvori dropdown nakon izbora jezika
+    langSwitcher.classList.remove('active');
   }
 </script>
-
-</body>
-</html>
