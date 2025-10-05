@@ -29,7 +29,7 @@ function setLanguage(lang) {
     case 'sr': flagImg.src = 'assets/images/flags/rs.png'; label = 'SR'; break;
     case 'de': flagImg.src = 'assets/images/flags/de.png'; label = 'DE'; break;
     case 'es': flagImg.src = 'assets/images/flags/es.png'; label = 'ES'; break;
-    default: flagImg.src = 'assets/images/flags/en.png'; label = 'EN';
+    default: flagImg.src = 'assets/images/flags/en.png'; label = 'EN'; break;
   }
   langBtn.innerHTML = `<img src="${flagImg.src}" width="20"> ${label} ▼`;
 }
