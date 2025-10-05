@@ -76,7 +76,6 @@
 </footer>
 
 <!-- JS -->
-<script src="assets/js/main.js"></script>
 <script>
   // Toggle nav menu on mobile
   const navToggle = document.getElementById('nav-toggle');
@@ -85,24 +84,38 @@
     navMenu.classList.toggle('active');
   });
 
-  function setLanguage(lang) {
-  const elements = document.querySelectorAll('[data-en]');
-  elements.forEach(el => {
-    const newText = el.getAttribute(`data-${lang}`);
-    if (newText) el.textContent = newText;
+  // Language dropdown
+  const langBtn = document.getElementById('lang-btn');
+  const langDropdown = document.getElementById('lang-dropdown');
+
+  langBtn.addEventListener('click', () => {
+    langDropdown.classList.toggle('show');
   });
 
-  // Promeni samo ikonu u glavnom dugmetu
-  const mainImg = langBtn.querySelector('img');
-  switch(lang) {
-    case 'sr': mainImg.src = 'assets/images/flags/rs.png'; break;
-    case 'de': mainImg.src = 'assets/images/flags/de.png'; break;
-    case 'es': mainImg.src = 'assets/images/flags/es.png'; break;
-    default: mainImg.src = 'assets/images/flags/en.png';
+  window.addEventListener('click', function(event) {
+    if (!event.target.closest('.language-switcher')) {
+      langDropdown.classList.remove('show');
+    }
+  });
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-en]');
+    elements.forEach(el => {
+      const newText = el.getAttribute(`data-${lang}`);
+      if (newText) el.textContent = newText;
+    });
+
+    // Promeni samo ikonu u glavnom dugmetu
+    const mainImg = langBtn.querySelector('img');
+    switch(lang) {
+      case 'sr': mainImg.src = 'assets/images/flags/rs.png'; break;
+      case 'de': mainImg.src = 'assets/images/flags/de.png'; break;
+      case 'es': mainImg.src = 'assets/images/flags/es.png'; break;
+      default: mainImg.src = 'assets/images/flags/en.png';
+    }
+
+    langDropdown.classList.remove('show'); // zatvori dropdown
   }
-
-  langDropdown.classList.remove('show'); // zatvori dropdown
-}
-
+</script>
 </body>
 </html>
