@@ -1,35 +1,42 @@
-const langBtn = document.getElementById('lang-btn');
-const langDropdown = document.getElementById('lang-dropdown');
+<!-- JS -->
+<script src="assets/js/main.js"></script>
 
-// Toggle dropdown
-langBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  langDropdown.classList.toggle('show');
-});
-
-// Close dropdown on outside click
-window.addEventListener('click', (event) => {
-  if (!langDropdown.contains(event.target) && event.target !== langBtn) {
-    langDropdown.classList.remove('show');
-  }
-});
-
-// Set language
-function setLanguage(lang) {
-  const elements = document.querySelectorAll('[data-en]');
-  elements.forEach(el => {
-    const newText = el.getAttribute(`data-${lang}`);
-    if (newText) el.textContent = newText;
+<script>
+  // Toggle nav menu on mobile
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
   });
 
-  // Update button flag and text
-  const flagImg = langBtn.querySelector('img');
-  let label = '';
-  switch(lang) {
-    case 'sr': flagImg.src = 'assets/images/flags/rs.png'; label = 'SR'; break;
-    case 'de': flagImg.src = 'assets/images/flags/de.png'; label = 'DE'; break;
-    case 'es': flagImg.src = 'assets/images/flags/es.png'; label = 'ES'; break;
-    default: flagImg.src = 'assets/images/flags/en.png'; label = 'EN'; break;
+  // Language dropdown
+  const langBtn = document.getElementById('lang-btn');
+  const langDropdown = document.getElementById('lang-dropdown');
+
+  langBtn.addEventListener('click', () => {
+    langDropdown.classList.toggle('show');
+  });
+
+  window.addEventListener('click', function(event) {
+    if (!event.target.closest('.language-switcher')) {
+      langDropdown.classList.remove('show');
+    }
+  });
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-en]');
+    elements.forEach(el => {
+      const newText = el.getAttribute(`data-${lang}`);
+      if (newText) el.textContent = newText;
+    });
+
+    // Promeni samo ikonu u glavnom dugmetu
+    const mainImg = langBtn.querySelector('img');
+    mainImg.src = `assets/images/flags/${lang === 'sr' ? 'rs' : lang}.png`;
+
+    langDropdown.classList.remove('show'); // zatvori dropdown
   }
-  langBtn.innerHTML = `<img src="${flagImg.src}" width="15"> ${label} ▼`;
-}
+</script>
+
+</body>
+</html>
