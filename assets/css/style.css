@@ -359,12 +359,24 @@ footer {
   display: none;
   position: absolute;
   top: 110%;
-  right: 0;
+  left: 0; /* promenjeno sa right: 0 */
   background: var(--white);
   border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   z-index: 1000;
   flex-direction: column;
+  min-width: 100%; /* da bude širina dugmeta */
+}
+
+.lang-dropdown button {
+  background: none;
+  border: none;
+  padding: 0.3em 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* da slika i tekst budu levo */
+  gap: 0.5em;
 }
 
 .lang-dropdown.show {
