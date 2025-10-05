@@ -1,3 +1,5 @@
+<!-- JS -->
+<script>
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -18,7 +20,6 @@ window.addEventListener('click', function() {
   langDropdown.classList.remove('show'); // klik van dropdowna zatvara
 });
 
-// Funkcija za promenu jezika
 function setLanguage(lang) {
   const elements = document.querySelectorAll('[data-en]');
   elements.forEach(el => {
@@ -26,9 +27,9 @@ function setLanguage(lang) {
     if (newText) el.textContent = newText;
   });
 
-  // Promeni ikonu dugmeta
   const mainImg = langBtn.querySelector('img');
   mainImg.src = `assets/images/flags/${lang === 'sr' ? 'rs' : lang}.png`;
 
   langDropdown.classList.remove('show');
 }
+</script>
