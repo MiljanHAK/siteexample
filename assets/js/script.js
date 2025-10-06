@@ -79,4 +79,9 @@ function setLanguage(lang) {
   // Zatvori dropdown nakon izbora jezika
   langSwitcher.classList.remove('active');
 }
+
+#nav-toggle { border: 2px solid red; }
+#mobile-nav-menu { border: 2px solid blue; }
+.language-switcher { border: 2px solid green; }
+
 </script>
