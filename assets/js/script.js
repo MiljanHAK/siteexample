@@ -4,25 +4,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const navToggle = document.getElementById("nav-toggle");
   const mobileNavMenu = document.getElementById("mobile-nav-menu");
   const langBtn = document.getElementById("lang-btn");
-  const langSwitcher = document.querySelector(".language-switcher");
-  const langDropdown = document.getElementById("lang-dropdown"); // tvoj dropdown
-  const navMenu = document.getElementById("nav-menu"); // desktop menu (ako treba)
+  const langSwitcher = document.getElementById("language-switcher");
+  const langDropdown = document.getElementById("lang-dropdown");
 
-  // Helper: sigurno menjanje tekstova (ako su data-* atributes)
+  // Funkcija za primenu jezika
   function applyLanguage(lang) {
-    // Ako koristiš data-lang atribut
-    document.querySelectorAll("[data-lang]").forEach((el) => {
-      const key = el.getAttribute("data-lang");
-      if (translations && translations[key] && translations[key][lang]) {
-        el.textContent = translations[key][lang];
-      } else {
-        // fallback: pokušaj sa data-{lang} (stara metoda)
-        const alt = el.getAttribute(`data-${lang}`);
-        if (alt) el.textContent = alt;
+    // Ažuriraj sve elemente sa data-* atributima
+    document.querySelectorAll("[data-en]").forEach(element => {
+      if (element.getAttribute(`data-${lang}`)) {
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          element.value = element.getAttribute(`data-${lang}`);
+        } else {
+          element.textContent = element.getAttribute(`data-${lang}`);
+        }
       }
     });
 
-    // promeni zastavicu unutar langBtn ako postoji
+    // Ažuriraj aktivne linkove u navigaciji
+    document.querySelectorAll('nav a').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === window.location.pathname.split('/').pop() || 
+          (link.getAttribute('href') === 'index.html' && window.location.pathname.endsWith('/'))) {
+        link.classList.add('active');
+      }
+    });
+
+    // Promeni zastavicu
     if (langBtn) {
       const img = langBtn.querySelector("img");
       if (img) {
@@ -33,77 +40,67 @@ document.addEventListener("DOMContentLoaded", function () {
           en: "assets/images/flags/en.png",
         };
         img.src = flagMap[lang] || flagMap.en;
+        img.alt = lang.toUpperCase();
       }
     }
+
+    // Sačuvaj izabrani jezik
+    localStorage.setItem("selectedLanguage", lang);
+    
+    // Ažuriraj html lang atribut
+    document.documentElement.lang = lang;
   }
 
-  // Globalna funkcija dostupna iz HTML (ako u HTML pozivaš setLanguage(...))
+  // Globalna funkcija za promenu jezika
   window.setLanguage = function (lang) {
-    if (!lang) return;
-    localStorage.setItem("selectedLanguage", lang);
     applyLanguage(lang);
-    // Zatvori dropdown (podržava oba pristupa)
+    // Zatvori dropdown
     if (langSwitcher) langSwitcher.classList.remove("active");
     if (langDropdown) langDropdown.classList.remove("active");
   };
 
-  // PRIMENI JEZIK IZ localStorage (ako postoji)
-  const savedLang = localStorage.getItem("selectedLanguage");
-  if (savedLang) applyLanguage(savedLang);
+  // Primena sačuvanog jezika ili podrazumevanog
+  const savedLang = localStorage.getItem("selectedLanguage") || 'en';
+  applyLanguage(savedLang);
 
-  // HAMBURGER (mobilni meni)
+  // HAMBURGER MENI
   if (navToggle && mobileNavMenu) {
     navToggle.addEventListener("click", function (e) {
       e.stopPropagation();
-      mobileNavMenu.classList.toggle("active");
-
-      // Ako tvoj CSS koristi #nav-menu .active prikaz, i to je okej.
-      // Menja ikonu
-      navToggle.textContent = mobileNavMenu.classList.contains("active") ? "✕" : "☰";
+      const isActive = mobileNavMenu.classList.toggle("active");
+      navToggle.textContent = isActive ? "✕" : "☰";
+      
+      // Zatvori language dropdown kada se otvori mobilni meni
+      if (langSwitcher) langSwitcher.classList.remove("active");
     });
   }
 
-  // LANGUAGE DROPDOWN: pokušaj da podržimo oba stila (toggle na switcher ili na dropdown)
-  if (langBtn) {
+  // LANGUAGE DROPDOWN
+  if (langBtn && langSwitcher) {
     langBtn.addEventListener("click", function (e) {
       e.stopPropagation();
-      // Ako postoji wrapper .language-switcher, toggle na njemu (ovo odgovara CSS-u koji ima `.language-switcher.active .lang-dropdown`)
-      if (langSwitcher) {
-        langSwitcher.classList.toggle("active");
-      }
-      // Ako postoji direktno langDropdown i tvoj CSS koristi .lang-dropdown.active, toggle i njega
-      if (langDropdown) {
-        langDropdown.classList.toggle("active");
+      langSwitcher.classList.toggle("active");
+      
+      // Zatvori mobilni meni kada se otvori language dropdown
+      if (mobileNavMenu) {
+        mobileNavMenu.classList.remove("active");
+        if (navToggle) navToggle.textContent = "☰";
       }
     });
   }
 
-  // Ako su u dropdownu linkovi/dugmad za jezike, vežemo ih (podrška i za <button> i za <a>)
-  if (langDropdown) {
-    // tražimo sve elemente unutar dropdown-a koji imaju data-lang atribut
-    langDropdown.querySelectorAll("[data-lang]").forEach((el) => {
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        const lang = this.getAttribute("data-lang");
-        if (lang) {
-          window.setLanguage(lang);
-        }
-      });
-    });
-  }
-
-  // Klik izvan: zatvori i mobilni i dropdown
-  window.addEventListener("click", function (e) {
-    // language
+  // Klik izvan zatvara dropdown i mobilni meni
+  document.addEventListener("click", function (e) {
+    // Zatvori language dropdown
     if (langSwitcher && !langSwitcher.contains(e.target)) {
       langSwitcher.classList.remove("active");
     }
-    if (langDropdown && !langDropdown.contains(e.target) && (!langSwitcher || !langSwitcher.contains(e.target))) {
-      langDropdown.classList.remove("active");
-    }
-
-    // mobile nav
-    if (mobileNavMenu && navToggle && !mobileNavMenu.contains(e.target) && !navToggle.contains(e.target)) {
+    
+    // Zatvori mobilni meni
+    if (mobileNavMenu && navToggle && 
+        !mobileNavMenu.contains(e.target) && 
+        !navToggle.contains(e.target) &&
+        mobileNavMenu.classList.contains("active")) {
       mobileNavMenu.classList.remove("active");
       navToggle.textContent = "☰";
     }
@@ -113,26 +110,20 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       if (langSwitcher) langSwitcher.classList.remove("active");
-      if (langDropdown) langDropdown.classList.remove("active");
-      if (mobileNavMenu) mobileNavMenu.classList.remove("active");
-      if (navToggle) navToggle.textContent = "☰";
+      if (mobileNavMenu) {
+        mobileNavMenu.classList.remove("active");
+        if (navToggle) navToggle.textContent = "☰";
+      }
     }
   });
 
-  // DEBUG - samo ako ti treba, možeš da isključiš posle
-  // console.log("script loaded: navToggle", !!navToggle, "mobileNavMenu", !!mobileNavMenu, "langBtn", !!langBtn, "langSwitcher", !!langSwitcher, "langDropdown", !!langDropdown);
+  // Zatvori meni kada se klikne na link (za mobilni)
+  if (mobileNavMenu) {
+    mobileNavMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNavMenu.classList.remove("active");
+        if (navToggle) navToggle.textContent = "☰";
+      });
+    });
+  }
 });
-
-/* ---------- TRANSLATIONS (primer) ----------
-   Napravi ključeve koji odgovaraju data-lang atributima u HTML-u.
-   Primer: <a href="about.html" data-lang="about_us">About us</a>
-*/
-const translations = {
-  "home": { en: "Home", sr: "Početna", de: "Startseite", es: "Inicio" },
-  "about_us": { en: "About us", sr: "O nama", de: "Über uns", es: "Sobre nosotros" },
-  "services": { en: "Services", sr: "Usluge", de: "Dienstleistungen", es: "Servicios" },
-  "portfolio": { en: "Portfolio", sr: "Portfolio", de: "Portfolio", es: "Portafolio" },
-  "blog": { en: "Blog", sr: "Blog", de: "Blog", es: "Blog" },
-  "contact_us": { en: "Contact us", sr: "Kontakt", de: "Kontakt", es: "Contacto" },
-  // dodaj sve ostale tekstove sa data-lang ključevima
-};
