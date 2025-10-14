@@ -441,41 +441,6 @@ footer {
   font-size: 0.95em;
 }
 
-/* ------------------------------
-   RESPONSIVE
---------------------------------*/
-@media (max-width: 768px) {
-  /* Desktop navigacija se sakriva na mobilnim */
-  #nav-menu {
-    display: none;
-  }
-
-  /* Mobilni meni se prikazuje */
-  #nav-toggle {
-    display: block;
-  }
-
-  /* Language switcher na mobilnim */
-  .language-switcher {
-    margin-right: 1em;
-  }
-
-  .hero h1 {
-    font-size: 2em;
-  }
-
-  .hero p {
-    font-size: 1em;
-  }
-
-  .hero-content .btn {
-    padding: 0.6em 1.5em;
-  }
-
-  .contact-links a {
-    display: block;
-    margin: 0.5em 0;
-  }
 
   /* ------------------------------
    MOBILNI MENI - DODACI
