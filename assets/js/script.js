@@ -1,78 +1,61 @@
-// ✅ Čekamo da se ceo DOM učita
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("✅ JS učitan i DOM spreman!");
-
-  // 🔹 ELEMENTI
   const navToggle = document.getElementById("nav-toggle");
-  const mobileNavMenu = document.getElementById("mobile-nav-menu");
+  const navMenu = document.getElementById("nav-menu");
   const langBtn = document.getElementById("lang-btn");
   const langDropdown = document.getElementById("lang-dropdown");
-  const langSwitcher = document.querySelector(".language-switcher");
 
-  if (!navToggle || !mobileNavMenu || !langBtn || !langSwitcher) {
-    console.warn("⚠️ Neki od elemenata nisu pronađeni u DOM-u!");
-    return;
+  // Hamburger toggle
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
   }
 
-  // 🔹 Hamburger meni toggle (mobilni)
-  navToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    mobileNavMenu.classList.toggle("active");
-    console.log("📱 Mobilni meni:", mobileNavMenu.classList.contains("active") ? "otvoren" : "zatvoren");
-
-    // Menja ikonu ☰ ↔ ✕
-    navToggle.textContent = mobileNavMenu.classList.contains("active") ? "✕" : "☰";
-  });
-
-  // 🔹 Jezički dropdown toggle
-  langBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    langSwitcher.classList.toggle("active");
-    console.log("🌐 Jezički meni:", langSwitcher.classList.contains("active") ? "otvoren" : "zatvoren");
-  });
-
-  // 🔹 Klik bilo gde zatvara meni i dropdown
-  window.addEventListener("click", (e) => {
-    if (!langSwitcher.contains(e.target)) {
-      langSwitcher.classList.remove("active");
-    }
-
-    if (!mobileNavMenu.contains(e.target) && !navToggle.contains(e.target)) {
-      mobileNavMenu.classList.remove("active");
-      navToggle.textContent = "☰";
-    }
-  });
-
-  // 🔹 ESC zatvara sve
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      langSwitcher.classList.remove("active");
-      mobileNavMenu.classList.remove("active");
-      navToggle.textContent = "☰";
-    }
-  });
-
-  // 🔹 Funkcija za promenu jezika
-  window.setLanguage = function (lang) {
-    console.log("🔄 Promena jezika na:", lang);
-
-    const elements = document.querySelectorAll("[data-en]");
-    elements.forEach((el) => {
-      const newText = el.getAttribute(`data-${lang}`);
-      if (newText) el.textContent = newText;
+  // Language dropdown
+  if (langBtn && langDropdown) {
+    langBtn.addEventListener("click", () => {
+      langDropdown.classList.toggle("active");
     });
 
-    // Menja zastavicu
-    const mainImg = langBtn.querySelector("img");
-    const flagPaths = {
-      sr: "assets/images/flags/rs.png",
-      de: "assets/images/flags/de.png",
-      es: "assets/images/flags/es.png",
-      en: "assets/images/flags/en.png",
-    };
-    mainImg.src = flagPaths[lang] || flagPaths.en;
+    // Klik izvan dropdown-a ga zatvara
+    document.addEventListener("click", (e) => {
+      if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+        langDropdown.classList.remove("active");
+      }
+    });
 
-    // Zatvara dropdown posle izbora
-    langSwitcher.classList.remove("active");
-  };
+    // Promena jezika
+    langDropdown.querySelectorAll("a").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        const lang = item.getAttribute("data-lang");
+        changeLanguage(lang);
+        localStorage.setItem("selectedLanguage", lang);
+        langDropdown.classList.remove("active");
+      });
+    });
+  }
+
+  // Ako je jezik ranije izabran — učitaj ga
+  const savedLang = localStorage.getItem("selectedLanguage");
+  if (savedLang) {
+    changeLanguage(savedLang);
+  }
 });
+
+// 👇 Dodaj svoje prevode ovde
+const translations = {
+  "home": { "en": "Home", "sr": "Početna", "de": "Startseite" },
+  "about_us": { "en": "About us", "sr": "O nama", "de": "Über uns" },
+  "contact_us": { "en": "Contact us", "sr": "Kontakt", "de": "Kontakt" },
+  // Dodaj sve ostale tekstove sa atributom data-lang="..."
+};
+
+function changeLanguage(lang) {
+  document.querySelectorAll("[data-lang]").forEach((el) => {
+    const key = el.getAttribute("data-lang");
+    if (translations[key] && translations[key][lang]) {
+      el.textContent = translations[key][lang];
+    }
+  });
+}
