@@ -3,39 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us | Test Tech Corporation</title>
+  <title data-en="About Us | Test Tech Corporation" 
+        data-sr="O nama | Test Tech Corporation" 
+        data-de="Über uns | Test Tech Corporation" 
+        data-es="Sobre nosotros | Test Tech Corporation">
+    About Us | Test Tech Corporation
+  </title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <header class="navbar">
   <div class="container">
     <img src="assets/images/logo.jpg" alt="Logo" class="logo">
+    
+    <!-- Desktop Navigation -->
     <nav id="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About Us</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html" data-en="Home" data-sr="Početna" data-de="Startseite" data-es="Inicio">Home</a>
+      <a href="about.html" class="active" data-en="About Us" data-sr="O nama" data-de="Über uns" data-es="Sobre nosotros">About Us</a>
+      <a href="services.html" data-en="Services" data-sr="Usluge" data-de="Dienstleistungen" data-es="Servicios">Services</a>
+      <a href="portfolio.html" data-en="Portfolio" data-sr="Portfolio" data-de="Portfolio" data-es="Portafolio">Portfolio</a>
+      <a href="blog.html" data-en="Blog" data-sr="Blog" data-de="Blog" data-es="Blog">Blog</a>
+      <a href="contact.html" data-en="Contact" data-sr="Kontakt" data-de="Kontakt" data-es="Contacto">Contact</a>
     </nav>
+
+    <!-- Language Selector dropdown -->
+    <div class="language-switcher" id="language-switcher">
+      <button class="lang-btn" id="lang-btn">
+        <img src="assets/images/flags/en.png" width="22" alt="EN">
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button onclick="setLanguage('en')"><img src="assets/images/flags/en.png" width="24" alt="EN"></button>
+        <button onclick="setLanguage('sr')"><img src="assets/images/flags/rs.png" width="24" alt="SR"></button>
+        <button onclick="setLanguage('de')"><img src="assets/images/flags/de.png" width="24" alt="DE"></button>
+        <button onclick="setLanguage('es')"><img src="assets/images/flags/es.png" width="24" alt="ES"></button>
+      </div>
+    </div>
+
+    <!-- Mobile menu toggle -->
     <button id="nav-toggle">☰</button>
   </div>
+
+  <!-- Mobile Navigation -->
+  <nav id="mobile-nav-menu" class="mobile-nav">
+    <a href="index.html" data-en="Home" data-sr="Početna" data-de="Startseite" data-es="Inicio">Home</a>
+    <a href="about.html" data-en="About Us" data-sr="O nama" data-de="Über uns" data-es="Sobre nosotros">About Us</a>
+    <a href="services.html" data-en="Services" data-sr="Usluge" data-de="Dienstleistungen" data-es="Servicios">Services</a>
+    <a href="portfolio.html" data-en="Portfolio" data-sr="Portfolio" data-de="Portfolio" data-es="Portafolio">Portfolio</a>
+    <a href="blog.html" data-en="Blog" data-sr="Blog" data-de="Blog" data-es="Blog">Blog</a>
+    <a href="contact.html" data-en="Contact" data-sr="Kontakt" data-de="Kontakt" data-es="Contacto">Contact</a>
+  </nav>
 </header>
 
 <section class="page-header">
-  <h1>About Test Tech Corporation</h1>
-  <p>Our mission is to empower businesses with innovative technology.</p>
+  <h1 data-en="About Test Tech Corporation" 
+      data-sr="O Test Tech Corporation" 
+      data-de="Über Test Tech Corporation" 
+      data-es="Sobre Test Tech Corporation">
+    About Test Tech Corporation
+  </h1>
+  <p data-en="Our mission is to empower businesses with innovative technology."
+     data-sr="Naša misija je da osnažimo poslovanje inovativnom tehnologijom."
+     data-de="Unsere Mission ist es, Unternehmen mit innovativer Technologie zu stärken."
+     data-es="Nuestra misión es empoderar a las empresas con tecnología innovadora.">
+    Our mission is to empower businesses with innovative technology.
+  </p>
 </section>
 
-<section class="container content">
-  <h2>Who We Are</h2>
-  <p>Test Tech Corporation is a technology-driven company specializing in web, cloud, and automation solutions. Founded by passionate engineers, we focus on delivering quality and performance to clients worldwide.</p>
+<section class="container content" style="padding: 4em 1em;">
+  <h2 data-en="Who We Are" 
+      data-sr="Ko smo mi" 
+      data-de="Wer wir sind" 
+      data-es="Quiénes somos">
+    Who We Are
+  </h2>
+  <p data-en="Test Tech Corporation is a technology-driven company specializing in web, cloud, and automation solutions. Founded by passionate engineers, we focus on delivering quality and performance to clients worldwide."
+     data-sr="Test Tech Corporation je kompanija vođena tehnologijom koja je specijalizovana za veb, cloud i automatizaciju rešenja. Osnovana od strane strastvenih inženjera, fokusiramo se na isporuku kvaliteta i performansi klijentima širom sveta."
+     data-de="Test Tech Corporation ist ein technologiegetriebenes Unternehmen, das sich auf Web-, Cloud- und Automatisierungslösungen spezialisiert hat. Gegründet von leidenschaftlichen Ingenieuren, konzentrieren wir uns auf die Lieferung von Qualität und Leistung an Kunden weltweit."
+     data-es="Test Tech Corporation es una empresa impulsada por la tecnología que se especializa en soluciones web, en la nube y de automatización. Fundada por ingenieros apasionados, nos enfocamos en entregar calidad y rendimiento a clientes en todo el mundo.">
+    Test Tech Corporation is a technology-driven company specializing in web, cloud, and automation solutions. Founded by passionate engineers, we focus on delivering quality and performance to clients worldwide.
+  </p>
+
+  <h2 data-en="Our Values" 
+      data-sr="Naše vrednosti" 
+      data-de="Unsere Werte" 
+      data-es="Nuestros valores" 
+      style="margin-top: 2em;">
+    Our Values
+  </h2>
+  <p data-en="We believe in innovation, quality, and customer satisfaction. Our team is committed to delivering cutting-edge solutions that drive business growth and digital transformation."
+     data-sr="Verujemo u inovacije, kvalitet i zadovoljstvo klijenata. Naš tim je posvećen pružanju vrhunskih rešenja koja pokreću poslovni rast i digitalnu transformaciju."
+     data-de="Wir glauben an Innovation, Qualität und Kundenzufriedenheit. Unser Team ist bestrebt, modernste Lösungen zu liefern, die Geschäftswachstum und digitale Transformation vorantreiben."
+     data-es="Creemos en la innovación, la calidad y la satisfacción del cliente. Nuestro equipo está comprometido a ofrecer soluciones de vanguardia que impulsen el crecimiento empresarial y la transformación digital.">
+    We believe in innovation, quality, and customer satisfaction. Our team is committed to delivering cutting-edge solutions that drive business growth and digital transformation.
+  </p>
+</section>
+
+<!-- Contact Links Section -->
+<section class="contact-links">
+  <h3 data-en="Contact Us" 
+      data-sr="Kontaktirajte nas" 
+      data-de="Kontaktieren Sie uns" 
+      data-es="Contáctenos">
+    Contact Us
+  </h3>
+  <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+  <a href="mailto:info@testtechcorp.com"><i class="fas fa-envelope"></i> Email</a>
 </section>
 
 <footer>
   <p>© 2025 Test Tech Corporation. All rights reserved.</p>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<!-- JavaScript -->
+<script src="assets/js/script.js"></script>
+
 </body>
 </html>
