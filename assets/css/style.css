@@ -477,7 +477,7 @@ footer {
     margin: 0.5em 0;
   }
 
-   /* ------------------------------
+  /* ------------------------------
    MOBILNI MENI - DODACI
 --------------------------------*/
 .mobile-nav {
@@ -527,16 +527,45 @@ footer {
   z-index: 1000;
 }
 
-/* Language switcher positioning on mobile */
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
 @media (max-width: 768px) {
-  .language-switcher {
-    margin-left: auto;
-    margin-right: 15px;
+  /* Desktop navigacija se sakriva na mobilnim */
+  #nav-menu {
+    display: none;
   }
-  
+
+  /* Mobilni meni se prikazuje */
+  #nav-toggle {
+    display: block;
+  }
+
+  /* Language switcher na mobilnim */
+  .language-switcher {
+    margin-right: 1em;
+    margin-left: auto; /* Ovo je novo - bitno za pozicioniranje */
+  }
+
   /* Osiguraj da je mobilni meni iznad svega */
   .mobile-nav {
     z-index: 999;
   }
-}
 
+  .hero h1 {
+    font-size: 2em;
+  }
+
+  .hero p {
+    font-size: 1em;
+  }
+
+  .hero-content .btn {
+    padding: 0.6em 1.5em;
+  }
+
+  .contact-links a {
+    display: block;
+    margin: 0.5em 0;
+  }
+}
